@@ -1,4 +1,3 @@
-# OpenDLV - Software for driverless vehicles realized with OpenDaVINCI
 # Copyright (C) 2017 Chalmers Revere
 #
 # This program is free software; you can redistribute it and/or
@@ -17,13 +16,12 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-project(opendlv-sim-sim)
-
 ###########################################################################
 # Set the search path for .cmake files.
 SET (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake.Modules" ${CMAKE_MODULE_PATH})
 SET (CMAKE_MODULE_PATH "${CMAKE_INSTALL_PREFIX}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules" ${CMAKE_MODULE_PATH})
 SET (CMAKE_MODULE_PATH "${OPENDAVINCI_DIR}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules" ${CMAKE_MODULE_PATH})
+SET (CMAKE_MODULE_PATH "${ODVDOPENDLVSTANDARDMESSAGESET_DIR}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules" ${CMAKE_MODULE_PATH})
 
 ###########################################################################
 # Global compile flags.
@@ -36,6 +34,10 @@ include(CheckCxxTestEnvironment)
 ###########################################################################
 # Find OpenDaVINCI.
 find_package(OpenDaVINCI REQUIRED)
+
+###########################################################################
+# Find ODVDOpenDLVStandardMessageSet.
+find_package(ODVDOpenDLVStandardMessageSet REQUIRED)
 
 ###########################################################################
 # Find OpenCV.
