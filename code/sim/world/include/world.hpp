@@ -20,10 +20,13 @@
 #ifndef SIM_WORLD_WORLD_HPP
 #define SIM_WORLD_WORLD_HPP
 
-#include <memory>
+#include <map>
 
 #include <opendavinci/odcore/base/module/TimeTriggeredConferenceClientModule.h>
+#include <opendavinci/odcore/base/Mutex.h>
 #include <opendavinci/odcore/data/Container.h>
+
+#include <odvdopendlvstandardmessageset/GeneratedHeaders_ODVDOpenDLVStandardMessageSet.h>
 
 namespace opendlv {
 namespace sim {
@@ -40,6 +43,10 @@ class World : public odcore::base::module::TimeTriggeredConferenceClientModule {
   odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode body();
   void setUp();
   void tearDown();
+
+  std::map<uint32_t, opendlv::coord::Frame> m_clientRootFrames;
+  std::map<uint32_t, opendlv::coord::KinematicState> m_clientKinematicStates;
+  odcore::base::Mutex m_kinematicsMutex;
 };
 
 }
