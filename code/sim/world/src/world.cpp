@@ -45,11 +45,11 @@ World::~World()
 void World::nextContainer(odcore::data::Container &a_container)
 {
   uint32_t const senderStamp = a_container.getSenderStamp();
-  if (a_container.getDataType() == opendlv::coord::KinematicState::ID() &&
+  if (a_container.getDataType() == opendlv::sim::KinematicState::ID() &&
       m_clientRootFrames.count(senderStamp)) {
 
     odcore::base::Lock l(m_kinematicsMutex);
-    auto kinematicState = a_container.getData<opendlv::coord::KinematicState>();
+    auto kinematicState = a_container.getData<opendlv::sim::KinematicState>();
     m_clientKinematicStates[senderStamp] = kinematicState;
   }
 }
@@ -60,7 +60,7 @@ odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode World::body()
   while (getModuleStateAndWaitForRemainingTimeInTimeslice() ==
       odcore::data::dmcp::ModuleStateMessage::RUNNING) {
 
-    std::map<uint32_t, opendlv::coord::KinematicState> 
+    std::map<uint32_t, opendlv::sim::KinematicState> 
       clientKinematicStatesCopy;
     {
       odcore::base::Lock l(m_kinematicsMutex);
@@ -119,7 +119,7 @@ odcore::data::dmcp::ModuleExitCodeMessage::ModuleExitCode World::body()
 
 
 
-      m_clientRootFrames[clientId] = opendlv::coord::Frame(newX, newY, newZ,
+      m_clientRootFrames[clientId] = opendlv::sim::Frame(newX, newY, newZ,
           newRoll, newPitch, newYaw);
     }
 
@@ -153,7 +153,7 @@ void World::setUp()
     double const startPitch = std::stod(clientStartPoseStringVec[4]);
     double const startYaw = std::stod(clientStartPoseStringVec[5]);
 
-    opendlv::coord::Frame frame(startX, startY, startZ, startRoll, startPitch,
+    opendlv::sim::Frame frame(startX, startY, startZ, startRoll, startPitch,
         startYaw);
     m_clientRootFrames[clientRootFrameId] = frame;
 

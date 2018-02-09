@@ -44,8 +44,8 @@ class World : public odcore::base::module::TimeTriggeredConferenceClientModule {
   void setUp();
   void tearDown();
 
-  std::map<uint32_t, opendlv::coord::Frame> m_clientRootFrames;
-  std::map<uint32_t, opendlv::coord::KinematicState> m_clientKinematicStates;
+  std::map<uint32_t, opendlv::sim::Frame> m_clientRootFrames;
+  std::map<uint32_t, opendlv::sim::KinematicState> m_clientKinematicStates;
   odcore::base::Mutex m_kinematicsMutex;
 };
 
