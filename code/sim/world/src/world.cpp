@@ -142,7 +142,7 @@ void World::setUp()
 
     std::string const clientStartPoseString = 
       getKeyValueConfiguration().getValue<std::string>(
-          "sim-world.client_start_pose_" + i);
+          "sim-world.client_start_pose_" + std::to_string(i));
   
     auto const clientStartPoseStringVec = 
       odcore::strings::StringToolbox::split(clientStartPoseString, ',');
